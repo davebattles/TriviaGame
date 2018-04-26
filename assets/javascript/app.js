@@ -1,14 +1,13 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-//Motor Vars  
-quizStep = 0; 
+  //Motor Vars  
+  quizStep = 0;
 
-//Game Vars
-correctTally = "0";
-incorrectTally = "0";
+  //Game Vars
+  correctTally = "0";
+  incorrectTally = "0";
 
-  var question = [
-    {
+  var question = [{
       question: "What is the hex of black?",
       answers: {
         a: '3',
@@ -111,185 +110,189 @@ incorrectTally = "0";
   ];
 
 
-function depopulateQuestions(){
-  $("#timer").empty();
-  $("#question").empty();
-  $("#answer1").empty();
-  $("#answer2").empty();
-  $("#answer3").empty();
-  $("#answer4").empty();
-  $(".one").removeAttr('id', 'correct');
-  $(".two").removeAttr('id', 'correct');
-  $(".three").removeAttr('id', 'correct');
-  $(".four").removeAttr('id', 'correct');
-  
-  
+  function depopulateQuestions() {
+    $("#timer").empty();
+    $("#question").empty();
+    $("#answer1").empty();
+    $("#answer2").empty();
+    $("#answer3").empty();
+    $("#answer4").empty();
+    $(".one").removeAttr('id', 'correct');
+    $(".two").removeAttr('id', 'correct');
+    $(".three").removeAttr('id', 'correct');
+    $(".four").removeAttr('id', 'correct');
 
 
-  // $("#div1").removeAttr({
-  //   'id' : 'correct','incorrect'
-  //   });
+
+
+    // $("#div1").removeAttr({
+    //   'id' : 'correct','incorrect'
+    //   });
+
+
+
+
+
+    // $("#div1").removeAttr('id','correct');
+    // $("#div1").removeAttr('id','incorrect');
+    // $("#div2").removeAttr('id','correct');
+    // $("#div2").removeAttr('id','incorrect');
+    // $("#div3").removeAttr('id','correct');
+    // $("#div3").removeAttr('id','incorrect');
+    // $("#div4").removeAttr('id','correct');
+    // $("#div4").removeAttr('id','incorrect');
+  }
+
+
+
+
+  function populateQuestions(i) {
+
+    num = i + 1;
+    $("#title").html("Question " + num);
+    $("#question").html(question[i].question);
+    $("#answer1").html(question[i].answers.a);
+    $("#answer2").html(question[i].answers.b);
+    $("#answer3").html(question[i].answers.c);
+    $("#answer4").html(question[i].answers.d);
+
+    if (question[i].correctAnswer == "a") {
+      $(".one").attr('id', 'correct');
+    } else {
+      $(".one").attr('id', 'incorrect');
+    }
+    if (question[i].correctAnswer == "b") {
+      $(".two").attr('id', 'correct');
+    } else {
+      $(".two").attr('id', 'incorrect');
+    }
+    if (question[i].correctAnswer == "c") {
+      $(".three").attr('id', 'correct');
+    } else {
+      $(".three").attr('id', 'incorrect');
+    }
+    if (question[i].correctAnswer == "d") {
+      $(".four").attr('id', 'correct');
+    } else {
+      $(".four").attr('id', 'incorrect');
+    }
+
+  }
+
+  function spawnDivs() {
+    $(".styledDiv").toggle();
+    // $("#div1").toggle();
+    // $("#div2").toggle();
+    // $("#div3").toggle();
+    // $("#div4").toggle();
+  }
+
+  function start() {
+    $("#start").hide();
+    spawnDivs();
+
+    if (quizStep == 0) {
+      populateQuestions(0);
+    } else {
+      quizStep++;
+    }
+    populateQuestions(quizStep);
+  }
+
+
+  function end() {
+
+    //TODO: WRITE OUT END STATS
+    spawnDivs();
+    score = correctTally * 10;
+    $("#title").html("Your Score:"+"<p>"+"<h2>"+score+"<h2>");
+    $("#message").html("You got " + correctTally + " correct and " + incorrectTally + " wrong.");
+
+    //TODO: WRITE A RESTART BUTTON
+
+
+  }
+
+
+
+  //   Game Routine
+
+  $("#start").on("click", function () {
+    depopulateQuestions();
+
+    start();
+  });
+
+
+
+
+  $("body").on("click", "#correct", function (event) {
+    console.log("Correct Click");
+    correctTally++;
+    console.log(correctTally);
+    depopulateQuestions();
+    quizStep++;
+    if (quizStep === 10) {
+      depopulateQuestions();
+      end();
+    }else{
+      populateQuestions(quizStep);
+    }
    
 
 
+  });
 
 
-  // $("#div1").removeAttr('id','correct');
-  // $("#div1").removeAttr('id','incorrect');
-  // $("#div2").removeAttr('id','correct');
-  // $("#div2").removeAttr('id','incorrect');
-  // $("#div3").removeAttr('id','correct');
-  // $("#div3").removeAttr('id','incorrect');
-  // $("#div4").removeAttr('id','correct');
-  // $("#div4").removeAttr('id','incorrect');
-}
-
-  
-function populateQuestions(i){
-  
-  num = i+1;
-  $("#title").html("Question "+num);
-  $("#question").html(question[i].question);
-  $("#answer1").html(question[i].answers.a);
-  $("#answer2").html(question[i].answers.b);
-  $("#answer3").html(question[i].answers.c);
-  $("#answer4").html(question[i].answers.d);
-
-  if(question[i].correctAnswer == "a"){
-    $(".one").attr('id', 'correct');
-  }else{
-    $(".one").attr('id', 'incorrect');
-  }
-  if(question[i].correctAnswer == "b"){
-    $(".two").attr('id', 'correct');
-  }else{
-    $(".two").attr('id', 'incorrect');
-  }
-  if(question[i].correctAnswer == "c"){
-    $(".three").attr('id', 'correct');
-  }else{
-    $(".three").attr('id', 'incorrect');
-  }
-  if(question[i].correctAnswer == "d"){
-    $(".four").attr('id','correct');
-  }else{
-    $(".four").attr('id','incorrect');
-  }
-
-  // console.log(question[i].correctAnswer);
-  // if(question[i].correctAnswer == "a"){
-  //   $("#div1").attr('div1', 'correct');
-  // }else{
-  //   $("#div1").removeAttr('div1', 'correct');
-  // }
-  // if(question[i].correctAnswer == "b"){
-  //   $("#div2").attr('div2', 'correct');
-  // }else{
-  //   $("#div2").removeAttr('div2', 'correct');
-  // }
-  // if(question[i].correctAnswer == "c"){
-  //   $("#div3").attr('div3', 'correct');
-  // }else{
-  //   $("#div3").removeAttr('div3', 'correct');
-  // }
-  // if(question[i].correctAnswer == "d"){
-  //   $("#div4").attr('div4', 'correct');
-  // }else{
-  //   $("#div4").removeAttr('div4', 'correct');
-  // }
-  
-}
-
-function spawnDivs(){
-  $(".styledDiv").toggle();
-  // $("#div1").toggle();
-  // $("#div2").toggle();
-  // $("#div3").toggle();
-  // $("#div4").toggle();
-}
-
-function start(){
-  $("#start").hide();
-  spawnDivs();
-  
-  if(quizStep == 0){
-    populateQuestions(0);
-  }else{
+  $("body").on("click", "#incorrect", function (event) {
+    console.log("Incorrect Click");
+    incorrectTally++;
+    console.log(incorrectTally);
+    depopulateQuestions();
     quizStep++;
-  }
+    if (quizStep === 10) {
+      depopulateQuestions();
+      end();
+    }else{
+      populateQuestions(quizStep);
+    }
+    
+  });
+
+
+
+
+
+
+
+
+
+
+
+  //TESTING FUNCTION
+  // CLICK ON COPYRIGHT MOVES GAME FORWARD
+
+  $("#next").on("click", function () {
+    console.log("Does this work?");
+    depopulateQuestions();
+    quizStep++;
     populateQuestions(quizStep);
-}
+
+  });
 
 
-
-
-//   Game Routine
-
-$("#start").on("click", function(){
-  depopulateQuestions();
-  
-  start();
-});
-
-
-
-
-$("body").on("click", "#correct", function(event){
-  console.log("Correct Click");
-  correctTally++;
-  console.log(correctTally);
-  depopulateQuestions();
-  quizStep++;
-  populateQuestions(quizStep);
-  
-
-});
-
-
-$("body").on("click", "#incorrect", function(event){
-  console.log("Incorrect Click");
-  incorrectTally++;
-  console.log(incorrectTally);  
-  depopulateQuestions();
-  quizStep++;
-  populateQuestions(quizStep);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-//TESTING FUNCTION
-// CLICK ON COPYRIGHT MOVES GAME FORWARD
-
-$("#next").on("click", function(){
-  console.log("Does this work?");
-  depopulateQuestions();
-  quizStep++;
-  populateQuestions(quizStep);
-
-});
-
-
-//////////////////////////////////////
+  //////////////////////////////////////
   //testing
   // console.log(question[i].question);
   // console.log("Answer is "+question[i].correctAnswer);
 
-//Advance the game with Question ++
-// i.e
+  //Advance the game with Question ++
+  // i.e
 
-//List of commands
+  //List of commands
 
-// populateQuestions( 0 );
-// depopulateQuestions();
+  // populateQuestions( 0 );
+  // depopulateQuestions();
 
 
 
