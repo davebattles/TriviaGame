@@ -19,6 +19,36 @@ incorrectTally = "0";
       correctAnswer: 'd'
     },
     {
+      question: "What is the hex of hippo?",
+      answers: {
+        a: '3',
+        b: 'whatt',
+        c: '115',
+        d: '#000'
+      },
+      correctAnswer: 'b'
+    },
+    {
+      question: "What is the hex of something?",
+      answers: {
+        a: '3',
+        b: 'whatt',
+        c: '115',
+        d: 'something'
+      },
+      correctAnswer: 'd'
+    },
+    {
+      question: "Pick b",
+      answers: {
+        a: '3',
+        b: 'click this!',
+        c: '115',
+        d: 'something'
+      },
+      correctAnswer: 'b'
+    },
+    {
       question: "What is the hex of white?",
       answers: {
         a: '3',
@@ -30,6 +60,36 @@ incorrectTally = "0";
     },
     {
       question: "What is the hex of green?",
+      answers: {
+        a: '3',
+        b: '#000099',
+        c: '10',
+        d: '#fff'
+      },
+      correctAnswer: 'b'
+    },
+    {
+      question: "pick a",
+      answers: {
+        a: '3',
+        b: '#000099',
+        c: '10',
+        d: '#fff'
+      },
+      correctAnswer: 'a'
+    },
+    {
+      question: "pick d",
+      answers: {
+        a: '3',
+        b: '#000099',
+        c: '10',
+        d: '#fff'
+      },
+      correctAnswer: 'd'
+    },
+    {
+      question: "pick b",
       answers: {
         a: '3',
         b: '#000099',
@@ -58,11 +118,35 @@ function depopulateQuestions(){
   $("#answer2").empty();
   $("#answer3").empty();
   $("#answer4").empty();
+  $(".one").removeAttr('id', 'correct');
+  $(".two").removeAttr('id', 'correct');
+  $(".three").removeAttr('id', 'correct');
+  $(".four").removeAttr('id', 'correct');
+  
+  
 
+
+  // $("#div1").removeAttr({
+  //   'id' : 'correct','incorrect'
+  //   });
+   
+
+
+
+
+  // $("#div1").removeAttr('id','correct');
+  // $("#div1").removeAttr('id','incorrect');
+  // $("#div2").removeAttr('id','correct');
+  // $("#div2").removeAttr('id','incorrect');
+  // $("#div3").removeAttr('id','correct');
+  // $("#div3").removeAttr('id','incorrect');
+  // $("#div4").removeAttr('id','correct');
+  // $("#div4").removeAttr('id','incorrect');
 }
 
   
 function populateQuestions(i){
+  
   num = i+1;
   $("#title").html("Question "+num);
   $("#question").html(question[i].question);
@@ -72,16 +156,24 @@ function populateQuestions(i){
   $("#answer4").html(question[i].answers.d);
 
   if(question[i].correctAnswer == "a"){
-    $("#div1").attr('id', 'correct');
+    $(".one").attr('id', 'correct');
+  }else{
+    $(".one").attr('id', 'incorrect');
   }
   if(question[i].correctAnswer == "b"){
-    $("#div2").attr('id', 'correct');
+    $(".two").attr('id', 'correct');
+  }else{
+    $(".two").attr('id', 'incorrect');
   }
   if(question[i].correctAnswer == "c"){
-    $('#div3.').attr('id', 'correct');
+    $(".three").attr('id', 'correct');
+  }else{
+    $(".three").attr('id', 'incorrect');
   }
   if(question[i].correctAnswer == "d"){
-    $("#div4").attr('id', 'correct');
+    $(".four").attr('id','correct');
+  }else{
+    $(".four").attr('id','incorrect');
   }
 
   // console.log(question[i].correctAnswer);
@@ -135,6 +227,7 @@ function start(){
 
 $("#start").on("click", function(){
   depopulateQuestions();
+  
   start();
 });
 
@@ -144,15 +237,19 @@ $("#start").on("click", function(){
 $("body").on("click", "#correct", function(event){
   console.log("Correct Click");
   correctTally++;
+  console.log(correctTally);
   depopulateQuestions();
   quizStep++;
   populateQuestions(quizStep);
+  
+
 });
 
 
 $("body").on("click", "#incorrect", function(event){
-  console.log("Correct Click");
-  correctTally++;
+  console.log("Incorrect Click");
+  incorrectTally++;
+  console.log(incorrectTally);  
   depopulateQuestions();
   quizStep++;
   populateQuestions(quizStep);
@@ -177,6 +274,7 @@ $("#next").on("click", function(){
   depopulateQuestions();
   quizStep++;
   populateQuestions(quizStep);
+
 });
 
 
