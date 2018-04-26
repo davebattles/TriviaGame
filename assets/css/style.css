@@ -21,3 +21,40 @@ body {
   color: #fff;
   font-size: 25px;
 }
+
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  width: 100vw;
+  height: 100px;
+}
+.start:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+footer {
+  position: absolute;
+  bottom: 25px;
+  height: 5px;
+  font-size: 15px;
+}
+.styledDiv {
+  
+  background-color: #000;
+  width: 250px;
+  height: 50px;
+  margin: 10px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.styledDiv:hover {
+  background-color: #aaa;
+}
