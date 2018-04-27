@@ -5,7 +5,7 @@ html {
 body {
   background-image: url(../images/matthew-cabret-638135-unsplash.jpg);
   color: #fff;
-  font-size: 30px;
+  font-size: 20px;
   font-family: 'Arimo', sans-serif;
   background-size: cover;
   height: 100vh;
@@ -17,12 +17,12 @@ body {
 
 h1 {
   text-align: center;
-  font-size: 150px;
+  font-size: 100px;
   text-shadow: 5px 10px #000;
   }
 h2 {
 text-align: center;
-font-size: 150px;
+font-size: 100px;
 }
 .gameBox {
   display: flex;
@@ -47,14 +47,14 @@ font-size: 150px;
   align-items: center;
   align-content: center;
   position: relative;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 100px;
-  color: #000;
+  color: rgb(255, 255, 255);
   width: 100vw;
-  height: 100px;
+  height: 75px;
 }
 .start:hover {
-  background-color: #000;
+  background-color: hsla(0, 0%, 0%, 0.5);
   color: #fff;
 }
 
@@ -66,7 +66,7 @@ footer {
 }
 .styledDiv {
   
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   width: 250px;
   height: 50px;
   margin: 10px;
@@ -75,5 +75,8 @@ footer {
 }
 
 .styledDiv:hover {
-  background-color: #aaa;
+  background-color: hsla(0, 0%, 0%, 0.5);
+}
+.message {
+  text-align: center;
 }
